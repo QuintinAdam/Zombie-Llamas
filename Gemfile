@@ -11,6 +11,7 @@ gem 'pg'
 gem 'rolify'
 gem 'simple_form'
 gem 'slim'
+gem 'omniauth'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
