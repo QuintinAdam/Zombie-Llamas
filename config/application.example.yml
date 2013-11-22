@@ -8,9 +8,18 @@
 
 # Add application configuration variables here, as shown below.
 #
-GMAIL_USERNAME: Your_Username
-GMAIL_PASSWORD: Your_Password
-ADMIN_NAME: First User
-ADMIN_EMAIL: user@example.com
-ADMIN_PASSWORD: changeme
-ROLES: [admin, user, VIP]
+GMAIL_USERNAME:   
+GMAIL_PASSWORD:   
+ADMIN_NAME:       
+ADMIN_EMAIL:      
+ADMIN_PASSWORD:   
+MEMBER_NAME:      
+MEMBER_EMAIL:     
+MEMBER_PASSWORD:  
+USER_NAME:        
+USER_EMAIL:       
+USER_PASSWORD:    
+ROLES:            
+
+SECERT_TOKEN:     
+DEVISE_SECERT:
