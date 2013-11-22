@@ -11,13 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131122000441) do
+ActiveRecord::Schema.define(:version => 20131122193646) do
 
   create_table "games", :force => true do |t|
-    t.integer  "user_id"     
-    t.integer  "points", :default => 0
-    t.integer  "gold", :default => 100
-    t.integer  "population"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -36,13 +33,15 @@ ActiveRecord::Schema.define(:version => 20131122000441) do
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "supplies", :force => true do |t|
-    t.integer  "game_id"
+    t.integer  "user_id"
     t.string   "name"
     t.string   "type"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "supplies", ["user_id"], :name => "index_supplies_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -58,6 +57,9 @@ ActiveRecord::Schema.define(:version => 20131122000441) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.integer  "points",                 :default => 1
+    t.integer  "gold",                   :default => 120
+    t.integer  "population",             :default => 5
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
