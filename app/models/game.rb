@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   belongs_to :user
-  has_many :events
+  # has_many :events
   attr_accessible :user_id, :time_last_clicked
 
   #validate :number_of_events, :on => :create
@@ -16,6 +16,7 @@ class Game < ActiveRecord::Base
   def run_event
     return false unless can_run_event?
     event_to_run = Event.return_random_event
-    result = event_to_run.run
+    result = Event.run(event_to_run)
+    # return result
   end
 end
