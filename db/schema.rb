@@ -11,12 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131122193646) do
+ActiveRecord::Schema.define(:version => 20131123193736) do
+
+  create_table "events", :force => true do |t|
+    t.integer  "game_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "type"
+    t.string   "interaction"
+  end
+
+  add_index "events", ["game_id"], :name => "index_events_on_game_id"
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.datetime "time_last_clicked"
   end
 
   add_index "games", ["user_id"], :name => "index_games_on_user_id"
@@ -57,9 +70,9 @@ ActiveRecord::Schema.define(:version => 20131122193646) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
-    t.integer  "points",                 :default => 1
-    t.integer  "gold",                   :default => 120
-    t.integer  "population",             :default => 5
+    t.integer  "points"
+    t.integer  "gold"
+    t.integer  "population"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

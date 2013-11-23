@@ -1,7 +1,12 @@
+p 
+  Start the game now! 
 = simple_form_for(@game) do |f|
   = f.error_notification
 
   .form-inputs
 
   .form-actions
-    = f.button :submit
+    - if current_user.game.nil?
+      = f.button :submit
+    - else
+      p You have a game already.

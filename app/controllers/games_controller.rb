@@ -2,18 +2,30 @@ class GamesController < ApplicationController
 
   # Make this the default game where the game is.
   def index
-    @games = Game.all
-    
+    if user_signed_in?
+      if current_user.game.nil?
+        #if current user is signed in and they don't have a game send then to the new game method.
+        redirect_to new_game_path
+      else
+        #if current user is signed in and they have a game redirect them to the show? page.
+        # redirect_to game_path
+        @game = User.find(current_user.id).game
+        render action: "show"
+      end
+    else
+      #if current user is not signed in send them to the home page? or sign up / log in page.
+      redirect_to new_user_registration_path
+    end
   end
 
   # This will be the profile page that anyone can see.
   def show
-    @game = Game.find(params[:id])
+    @game = User.find(params[current_user.id]).game
   end
 
   #If the User has no game then the new action will be called.
   def new
-    @game = Game.new
+    @game = current_user.game.new
   end
 
   # I'm not sure if I need an edit. I think I just need an update to update the points and gold and stuff?
@@ -23,9 +35,9 @@ class GamesController < ApplicationController
 
   #used when the new game action is called. 
   def create
-    @game = Game.new(params[:game])
+    @game = current_user.game.new(params[:game])
     if @game.save
-      redirect_to @game, notice: 'Game was successfully created.'
+      redirect_to @game, notice: 'Your Game was successfully created.'
     else
       render action: "new"
     end
