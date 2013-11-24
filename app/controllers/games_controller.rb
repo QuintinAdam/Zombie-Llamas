@@ -10,6 +10,8 @@ class GamesController < ApplicationController
         #if current user is signed in and they have a game redirect them to the show? page.
         # redirect_to game_path
         @game = User.find(current_user.id).game
+        @user = @game.user
+        @logs = @game.user_events
         render action: "show"
       end
     else
@@ -21,6 +23,8 @@ class GamesController < ApplicationController
   # This will be the profile page that anyone can see.
   def show
     @game = User.find(params[current_user.id]).game
+    @user = @game.user
+    @logs = @game.user_events
   end
 
   #If the User has no game then the new action will be called.

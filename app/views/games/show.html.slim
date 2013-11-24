@@ -1,7 +1,20 @@
+p = "Gold: #{@user.gold}"
+p = "Points: #{@user.points}"
+p = "Populations: #{@user.population}"  
+
 = @game.can_run_event?
 - if @game.can_run_event?
   button.btn.btn-default type="button"
     Do Event!
+.logs    
+  - if @logs.nil?
+    p Do nothing.
+  -else  
+    - @logs.each do |x|
+      .log
+        = "#{time_ago_in_words(x.created_at)} ago. "
+        = "You #{x.description} "
+      
 
 
 

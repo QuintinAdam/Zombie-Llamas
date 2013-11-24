@@ -2,7 +2,7 @@ class CreateUserEvents < ActiveRecord::Migration
   def change
     create_table :user_events do |t|
       t.belongs_to :game
-      t.text :decription
+      t.text :description
       t.string :negative
       t.string :positive
       t.string :effect
