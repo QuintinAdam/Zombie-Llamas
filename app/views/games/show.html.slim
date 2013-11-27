@@ -1,11 +1,10 @@
+h3 = @user.name
 p = "Gold: #{@user.gold}"
 p = "Points: #{@user.points}"
 p = "Populations: #{@user.population}"  
 
 = @game.can_run_event?
-- if @game.can_run_event?
-  button.btn.btn-default type="button"
-    Do Event!
+= link_to_if(@game.can_run_event?, "Run Event", {controller: "events", action: "new"})
 .logs    
   - if @logs.nil?
     p Do nothing.

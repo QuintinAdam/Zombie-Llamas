@@ -10,9 +10,10 @@ class GamesController < ApplicationController
         #if current user is signed in and they have a game redirect them to the show? page.
         # redirect_to game_path
         @game = User.find(current_user.id).game
-        @user = @game.user
-        @logs = @game.user_events
-        render action: "show"
+        # @user = @game.user
+        # @logs = @game.user_events
+        # render action: "show"
+        redirect_to game_path(@game.id)
       end
     else
       #if current user is not signed in send them to the home page? or sign up / log in page.
@@ -22,7 +23,7 @@ class GamesController < ApplicationController
 
   # This will be the profile page that anyone can see.
   def show
-    @game = User.find(params[current_user.id]).game
+    @game = User.find(current_user.id).game
     @user = @game.user
     @logs = @game.user_events
   end
@@ -49,12 +50,13 @@ class GamesController < ApplicationController
 
   # updates the gold and stuff?
   def update 
-    @game = Game.find(params[:id])
-    if @game.update_attributes(params[:game])
-      redirect_to @game, notice: 'Game was successfully updated.'
-    else 
-      render action: "edit" 
-    end 
+    @game = User.find(current_user.id).game
+    # if 
+    # @game.update_attributes(params[:game])
+    redirect_to @game, notice: 'Game was successfully updated.'
+    # else 
+    #   render action: "edit" 
+    # end 
   end 
 
   # so an admin can destroy a users game.

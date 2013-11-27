@@ -27,9 +27,6 @@ h2. Development
 * Authentication: Devise
 * Authorization: CanCan
 
-h2. Email
-
-The application is configured to send email using a Gmail account.
 
 h2. Getting Started
 
@@ -42,8 +39,6 @@ h4. Issues
 
 
 h2. Contributing
-
-If you make improvements to this application, please share with others.
 
 * Fork the project on GitHub.
 * Make your feature addition or bug fix.
