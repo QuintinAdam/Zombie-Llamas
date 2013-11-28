@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
     # need some way to make this organized. events will have a name description(of what happened) and how they will interact with the user.
     random = Random.new
     # random.rand(1..1) # ..100
-    @random_event = Event.find(random.rand(1..1)) # (random)
+    random_event = Event.find(random.rand(1..1)) # (random)
     
     #latter events will need to be picked by where the users location is. 
   end
@@ -36,25 +36,25 @@ class Event < ActiveRecord::Base
   #   positive_and_negative
   # end
 
-  def self.run(event_to_run)
-    positive_array = []
-    negative_array = []
-    split_event = event_to_run.interaction.split
-    split_events.each do |x|
-      if x.include?("+")
-        positive_array << x
-      elsif x.include?("-")
-        negative_array << x
-      end
-    end
-    #Do the event and update it to the user_event_log
-    # positive_and_negative = Event.split_interaction(event_to_run.interaction)
-    u = UserEvent.create(:description => event_to_run.description,
-                         :effect => event_to_run.effect,
-                         :negative => negative_array, 
-                         :positive => positive_array, 
-                         :game_id => User.find(current_user.id)
-                        )
+  # def self.run(event_to_run)
+  #   positive_array = []
+  #   negative_array = []
+  #   split_events = event_to_run.interaction.split
+  #   split_events.each do |x|
+  #     if x.include?("+")
+  #       positive_array << x
+  #     elsif x.include?("-")
+  #       negative_array << x
+  #     end
+  #   end
+  #   #Do the event and update it to the user_event_log
+  #   # positive_and_negative = Event.split_interaction(event_to_run.interaction)
+  #   u = UserEvent.create(:description => event_to_run.description,
+  #                        :effect => event_to_run.effect,
+  #                        :negative => negative_array, 
+  #                        :positive => positive_array, 
+  #                        :game_id => @game.id
+  #                       )
 
     # event_to_run.description # in the logs i will be displaying like #username #(discription) event happened and you lost / gained #(interactions). 
     # event_to_run.effect #this will effect the style by adding a class to the logs
@@ -63,7 +63,7 @@ class Event < ActiveRecord::Base
     # but this should grab the event interaction and update the users attributes.
 
     # @random_event.
-  end
+  # end
 
  
 

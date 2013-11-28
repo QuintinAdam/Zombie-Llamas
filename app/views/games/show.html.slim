@@ -4,7 +4,7 @@ p = "Points: #{@user.points}"
 p = "Populations: #{@user.population}"  
 
 = @game.can_run_event?
-= link_to_if(@game.can_run_event?, "Run Event", {controller: "events", action: "new"})
+= link_to_if(@game.can_run_event?, "Run Event", action: "event_runner")
 .logs    
   - if @logs.nil?
     p Do nothing.

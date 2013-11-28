@@ -10,9 +10,6 @@ class GamesController < ApplicationController
         #if current user is signed in and they have a game redirect them to the show? page.
         # redirect_to game_path
         @game = User.find(current_user.id).game
-        # @user = @game.user
-        # @logs = @game.user_events
-        # render action: "show"
         redirect_to game_path(@game.id)
       end
     else
@@ -30,7 +27,12 @@ class GamesController < ApplicationController
 
   #If the User has no game then the new action will be called.
   def new
-    @game = current_user.game.new
+    if current_user.game.nil?
+      @game = current_user.game.new
+    else
+      @game = User.find(current_user.id).game
+      redirect_to game_path(@game.id)
+    end
   end
 
   # I'm not sure if I need an edit. I think I just need an update to update the points and gold and stuff?
@@ -42,7 +44,7 @@ class GamesController < ApplicationController
   def create
     @game = current_user.game.new(params[:game])
     if @game.save
-      redirect_to @game, notice: 'Your Game was successfully created.'
+      redirect_to @game, notice: 'A new game was successfully created.'
     else
       render action: "new"
     end
@@ -53,7 +55,8 @@ class GamesController < ApplicationController
     @game = User.find(current_user.id).game
     # if 
     # @game.update_attributes(params[:game])
-    redirect_to @game, notice: 'Game was successfully updated.'
+    # redirect_to @game, notice: 'Game was successfully updated.'
+    redirect_to game_path(@game.id)
     # else 
     #   render action: "edit" 
     # end 
@@ -64,5 +67,11 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @game.destroy
     redirect_to games_url
+  end
+
+  def event_runner
+    @game = User.find(current_user.id).game
+    @game.run_event
+    redirect_to game_path(@game.id)
   end
 end

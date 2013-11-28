@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
 
   create_table "user_events", :force => true do |t|
     t.integer  "game_id"
+    t.string   "name"
     t.text     "description"
     t.string   "negative"
     t.string   "positive"
