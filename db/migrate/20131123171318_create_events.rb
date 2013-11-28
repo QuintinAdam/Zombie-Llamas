@@ -6,7 +6,10 @@ class CreateEvents < ActiveRecord::Migration
       t.string :effect
       t.string :negative
       t.string :positive
-
+      t.integer :effected_gold
+      t.integer :effected_points
+      t.integer :effected_population
+      
       t.timestamps
     end
   end

@@ -2,15 +2,14 @@ class Game < ActiveRecord::Base
   belongs_to :user
   has_many :user_events
   attr_accessible :user_id, :time_last_clicked
-  before_update :run_event
-  #validate :number_of_events, :on => :create
-
-  #def number_of_events
-    # self.user.user_events.first.destroy if self.user.user_events.count() >= 10
-  #end
+  # after_save :number_of_events
+  #fix this
+  def number_of_events
+    self.user_events.last.destroy if self.user_events.count() > 10
+  end
 
   def can_run_event?
-    Time.now - time_last_clicked > 60 
+    Time.now - time_last_clicked > 10 
   end
 
   def run_event(g_id)
@@ -31,11 +30,17 @@ class Game < ActiveRecord::Base
     game = Game.find(game_id)
     user = User.find(game.user_id)
     game.update_attributes(time_last_clicked: Time.now)
-    #needs to update the user based on the event
-    user.update_attributes(:gold => 1500, :points => 110, :population => 2)
-    
-
-    #change all this.
+    # update the user based on the event
+    unless event_to_run.effected_gold.nil?
+      user.gold += event_to_run.effected_gold
+    end
+    unless event_to_run.effected_points.nil?
+      user.points += event_to_run.effected_points
+    end
+    unless event_to_run.effected_population.nil?
+      user.population += event_to_run.effected_population
+    end
+    user.save
   end
 
 end

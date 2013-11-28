@@ -3,22 +3,17 @@ p = "Gold: #{@user.gold}"
 p = "Points: #{@user.points}"
 p = "Populations: #{@user.population}"  
 
-= @game.can_run_event?
-= link_to_if(@game.can_run_event?, "Run Event", action: "event_runner")
+= link_to_if(@game.can_run_event?, "Run Event", action: "event_runner", class: "btn btn-default btn-lg")
 .logs    
   - if @logs.nil?
-    p Do nothing.
-  -else  
+    p There is nothing here... Run an Event.
+  -else
+    = @logs.count  
     - @logs.each do |x|
-      .log
-        = "#{time_ago_in_words(x.created_at)} ago. "
-        = "You #{x.description}."
-        = "You got #{x.positive}."
-        = "You lost #{x.negative.to_a}"
-      
-
-
-
-/ = link_to 'Edit', edit_game_path(@game)
-
-/ = link_to 'Back', games_path
+      .log class="#{x.effect}"
+        p = "#{time_ago_in_words(x.created_at)} ago - #{x.name}"
+        p = "#{x.description}."
+        - unless x.positive.nil?
+          p = "You gained #{x.positive}."
+        - unless x.negative.nil?
+          p = "You lost #{x.negative}."

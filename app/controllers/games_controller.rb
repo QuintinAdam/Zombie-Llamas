@@ -1,6 +1,5 @@
 class GamesController < ApplicationController
 
-  # Make this the default game where the game is.
   def index
     if user_signed_in?
       if current_user.game.nil?
@@ -53,13 +52,7 @@ class GamesController < ApplicationController
   # updates the gold and stuff?
   def update 
     @game = User.find(current_user.id).game
-    # if 
-    # @game.update_attributes(params[:game])
-    # redirect_to @game, notice: 'Game was successfully updated.'
     redirect_to game_path(@game.id)
-    # else 
-    #   render action: "edit" 
-    # end 
   end 
 
   # so an admin can destroy a users game.
@@ -69,6 +62,7 @@ class GamesController < ApplicationController
     redirect_to games_url
   end
 
+  # This is how i start trigger the event. it sets some variables as well so i can use them latter.
   def event_runner
     @game = User.find(current_user.id).game
     @game.run_event(@game.id)

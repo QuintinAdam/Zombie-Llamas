@@ -19,8 +19,11 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
     t.string   "effect"
     t.string   "negative"
     t.string   "positive"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "effected_gold"
+    t.integer  "effected_points"
+    t.integer  "effected_population"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "games", :force => true do |t|
