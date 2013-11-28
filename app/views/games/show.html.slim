@@ -12,7 +12,9 @@ p = "Populations: #{@user.population}"
     - @logs.each do |x|
       .log
         = "#{time_ago_in_words(x.created_at)} ago. "
-        = "You #{x.description} "
+        = "You #{x.description}."
+        = "You got #{x.positive}."
+        = "You lost #{x.negative.to_a}"
       
 
 

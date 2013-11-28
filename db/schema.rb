@@ -17,7 +17,8 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
     t.string   "name"
     t.text     "description"
     t.string   "effect"
-    t.string   "interaction"
+    t.string   "negative"
+    t.string   "positive"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

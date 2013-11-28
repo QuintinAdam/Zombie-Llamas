@@ -4,7 +4,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :effect
-      t.string :interaction
+      t.string :negative
+      t.string :positive
 
       t.timestamps
     end

@@ -71,7 +71,7 @@ class GamesController < ApplicationController
 
   def event_runner
     @game = User.find(current_user.id).game
-    @game.run_event
+    @game.run_event(@game.id)
     redirect_to game_path(@game.id)
   end
 end

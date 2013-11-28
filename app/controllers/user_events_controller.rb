@@ -1,6 +1,8 @@
 class UserEventsController < ApplicationController 
   def new
-  end 
+
+  end
+   
   def create
   #   @uevent = current_user.game.new(params[:game])
   #   if @game.save

@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
   # belongs_to :game
-  attr_accessible :name, :description, :effect, :interaction
+  attr_accessible :name, :description, :effect, :positive, :negative
   #events will effect the user like increase and decrease the population/gold/points
   
   def self.return_random_event
