@@ -3,12 +3,12 @@ p = "Gold: #{@user.gold}"
 p = "Points: #{@user.points}"
 p = "Populations: #{@user.population}"  
 
-= link_to_if(@game.can_run_event?, "Run Event", action: "event_runner", class: "btn btn-default btn-lg")
+-if @game.can_run_event?
+  = button_to "Run Event", event_runner_path, method: :get, class: "btn bt-lg btn-primary"
 .logs    
   - if @logs.nil?
     p There is nothing here... Run an Event.
-  -else
-    = @logs.count  
+  -else  
     - @logs.each do |x|
       .log class="#{x.effect}"
         p = "#{time_ago_in_words(x.created_at)} ago - #{x.name}"

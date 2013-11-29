@@ -2,10 +2,10 @@ class Game < ActiveRecord::Base
   belongs_to :user
   has_many :user_events
   attr_accessible :user_id, :time_last_clicked
-  # after_save :number_of_events
+  after_save :number_of_events
   #fix this
   def number_of_events
-    self.user_events.last.destroy if self.user_events.count() > 10
+    self.user_events.first.destroy if self.user_events.count() > 10
   end
 
   def can_run_event?
