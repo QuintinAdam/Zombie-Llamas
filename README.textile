@@ -1,11 +1,5 @@
 h1. Zombie llama
 
-
-
-h2. Diagnostics
-
-
-
 h2. Ruby on Rails
 
 This application requires:
@@ -21,7 +15,7 @@ This application uses PostgreSQL with ActiveRecord.
 h2. Development
 
 * Template Engine: Slim
-* Testing Framework: Test::Unit
+* Testing Framework: Minitest
 * Front-end Framework: Twitter Bootstrap 3.0 (Sass)
 * Form Builder: SimpleForm
 * Authentication: Devise

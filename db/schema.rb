@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131123213638) do
+ActiveRecord::Schema.define(:version => 20131202015319) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
     t.string   "location"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "current_weapon"
+    t.string   "current_base"
+    t.string   "current_llama"
   end
 
   add_index "games", ["user_id"], :name => "index_games_on_user_id"
@@ -34,6 +37,20 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "user_bases", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "decription"
+    t.integer  "defence"
+    t.integer  "defence_bonus"
+    t.integer  "luck"
+    t.integer  "order"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "user_bases", ["user_id"], :name => "index_user_bases_on_user_id"
+
   create_table "user_events", :force => true do |t|
     t.integer  "game_id"
     t.string   "name"
@@ -46,6 +63,36 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
   end
 
   add_index "user_events", ["game_id"], :name => "index_user_events_on_game_id"
+
+  create_table "user_llamas", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "decription"
+    t.integer  "power"
+    t.integer  "power_bonus"
+    t.integer  "defence"
+    t.integer  "defence_bonus"
+    t.integer  "luck"
+    t.integer  "order"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "user_llamas", ["user_id"], :name => "index_user_llamas_on_user_id"
+
+  create_table "user_weapons", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "decription"
+    t.integer  "power"
+    t.integer  "power_bonus"
+    t.integer  "luck"
+    t.integer  "order"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "user_weapons", ["user_id"], :name => "index_user_weapons_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -64,6 +111,10 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
     t.integer  "points"
     t.integer  "gold"
     t.integer  "population"
+    t.integer  "total_power"
+    t.integer  "total_defense"
+    t.integer  "total_luck"
+    t.integer  "total_order"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

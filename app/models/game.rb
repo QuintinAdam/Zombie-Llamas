@@ -12,33 +12,36 @@ class Game < ActiveRecord::Base
     Time.now - time_last_clicked > 10 
   end
 
-  def run_event(g_id)
-    return false unless can_run_event?
-    event_to_run = Event.return_random_event
-    run(event_to_run, g_id)
+  def run_event(game_id)
+    if can_run_event?
+      event_returned = Event.return_random_event(game_id)
+      run(event_returned, game_id)
+    else
+      false
+    end
   end
 
-  def run(event_to_run, game_id)
+  def run(event_returned, game_id)
     # raise Game
-    u = UserEvent.create(:name => event_to_run.name,
-                         :description => event_to_run.description,
-                         :effect => event_to_run.effect,
-                         :negative => event_to_run.negative, 
-                         :positive => event_to_run.positive,
+    u = UserEvent.create(:name => event_returned.name,
+                         :description => event_returned.description,
+                         :effect => event_returned.effect,
+                         :negative => event_returned.negative, 
+                         :positive => event_returned.positive,
                          :game_id => game_id
                         )
     game = Game.find(game_id)
     user = User.find(game.user_id)
     game.update_attributes(time_last_clicked: Time.now)
     # update the user based on the event
-    unless event_to_run.effected_gold.nil?
-      user.gold += event_to_run.effected_gold
+    unless event_returned.effected_gold.nil?
+      user.gold += event_returned.effected_gold
     end
-    unless event_to_run.effected_points.nil?
-      user.points += event_to_run.effected_points
+    unless event_returned.effected_points.nil?
+      user.points += event_returned.effected_points
     end
-    unless event_to_run.effected_population.nil?
-      user.population += event_to_run.effected_population
+    unless event_returned.effected_population.nil?
+      user.population += event_returned.effected_population
     end
     user.save
   end
