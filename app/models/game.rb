@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   belongs_to :user
   has_many :user_events
-  attr_accessible :user_id, :time_last_clicked
+  attr_accessible :user_id, :time_last_clicked, :location, :current_weapon, :current_base, :current_llama 
   after_save :number_of_events
   #fix this
   def number_of_events

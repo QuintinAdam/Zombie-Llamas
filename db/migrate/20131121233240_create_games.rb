@@ -2,9 +2,8 @@ class CreateGames < ActiveRecord::Migration
   def change
     create_table :games do |t|
       t.belongs_to :user
-      t.integer :points
-      t.integer :gold
-      t.integer :population
+      t.datetime :time_last_clicked
+      t.string :location
 
       t.timestamps
     end

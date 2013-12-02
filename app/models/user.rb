@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   has_one :game
-  # has_many :supplies 
   rolify
   after_create :init_setup
   # Include default devise modules. Others available are:

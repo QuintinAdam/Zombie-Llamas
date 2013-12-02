@@ -13,24 +13,12 @@
 
 ActiveRecord::Schema.define(:version => 20131123213638) do
 
-  create_table "events", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "effect"
-    t.string   "negative"
-    t.string   "positive"
-    t.integer  "effected_gold"
-    t.integer  "effected_points"
-    t.integer  "effected_population"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
   create_table "games", :force => true do |t|
     t.integer  "user_id"
+    t.datetime "time_last_clicked"
+    t.string   "location"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-    t.datetime "time_last_clicked"
   end
 
   add_index "games", ["user_id"], :name => "index_games_on_user_id"
@@ -45,17 +33,6 @@ ActiveRecord::Schema.define(:version => 20131123213638) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
-
-  create_table "supplies", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.string   "type"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "supplies", ["user_id"], :name => "index_supplies_on_user_id"
 
   create_table "user_events", :force => true do |t|
     t.integer  "game_id"

@@ -12,6 +12,7 @@ gem 'rolify'
 gem 'simple_form'
 gem 'slim'
 gem 'omniauth'
+# gem 'simple_contact'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

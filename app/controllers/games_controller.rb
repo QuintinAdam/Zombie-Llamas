@@ -21,7 +21,7 @@ class GamesController < ApplicationController
   def show
     @game = User.find(current_user.id).game
     @user = @game.user
-    @logs = @game.user_events
+    @logs = @game.user_events.order('id DESC')
   end
 
   #If the User has no game then the new action will be called.
