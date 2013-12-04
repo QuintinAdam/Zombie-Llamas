@@ -14,42 +14,91 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, 
                   :gold, :points, :population, 
                   :total_power, :total_defense, :total_luck, :total_order 
+ 
 
-
-  @user = User.find(current_user.id)  
-  @random = Random.new             
-  def zombie_math(zom_hash)
+  def self.zombie_math(zom_hash, game_id)
+    random = Random.new 
+    game = Game.find(game_id)
+    user = User.find(game.user_id)
     #does the zombie get through your defense?
-    luck = @random.rand(0..@user.total_luck)
+    luck = random.rand(0..user.total_luck)
     dluck = luck % 10.0
-    users_power = (@user.total_power * dluck) + @user.total_power
-    users_defense = (@user.total_defense * dluck) + @user.total_defense
-    users_order = (@user.total_order * dluck) + @user.total_order
+    users_power = (user.total_power * dluck) + user.total_power
+    users_defense = (user.total_defense * dluck) + user.total_defense
+    users_order = (user.total_order * dluck) + user.total_order
     if zom_hash[:power] >= users_defense
-      # zombie got through your defenses. 
-      if zom_hash[:defence] >= users_power
-        # You did not kill the zombie 
-      else
-        # You got through the zombies defense
+      # zombie got through your defenses.
+      event = {name: zom_hash[:name], description: "#{zom_hash[:name]} got through your defenses easily.",
+                 effect: "bad", negative: nil, positive: nil, 
+                 effected_gold: nil, effected_points: nil, effected_population: nil
+                }
+      Game.run(event, game_id)
+      added = users_power + zom_hash[:defense]
+      chance = random.rand(1..added)
+      case chance
+      when 1..users_power
+        #user killed the zombie
+        event = {name: zom_hash[:name], description: "You Killed #{zom_hash[:name]}",
+                 effect: "good", negative: nil, positive: nil, 
+                 effected_gold: zom_hash[:effected_gold], effected_points: zom_hash[:effected_points], effected_population: nil
+                }
+        Game.run(event, game_id)        
+      when (users_power + 1)..added
+        # You killed the zombie but it took one of your own with it. 
+        event = {name: zom_hash[:name], description: "#{zom_hash[:name]} be killing your people.",
+                 effect: "bad", negative: nil, positive: nil, 
+                 effected_gold: nil, effected_points: nil, effected_population: (user.population >= 3 ? zom_hash[:effected_population] : nil )
+                }
+        Game.run(event, game_id)        
       end
     else
       # zombie is having a hard time getting though your defense.
       added = users_defense + zom_hash[:power]
-      chance = @random.rand(1..added)
+      chance = random.rand(1..added)
       case chance
       when 1..zom_hash[:power]
         #zombie got though the defense
+        event = {name: zom_hash[:name], description: "#{zom_hash[:name]} had a hard time getting through your defenses. But it was able to make it's way through.",
+                 effect: "bad", negative: nil, positive: nil, 
+                 effected_gold: nil, effected_points: nil, effected_population: nil
+                }
+        Game.run( event, game_id)        
+        added = users_power + zom_hash[:defense]
+        chance = random.rand(1..added)
+        case chance
+        when 1..users_power
+          #user killed the zombie
+          event = {name: zom_hash[:name], description: "You Killed #{zom_hash[:name]}",
+                  effect: "good", negative: nil, positive: nil, 
+                  effected_gold: zom_hash[:effected_gold], effected_points: zom_hash[:effected_points], effected_population: nil
+                  }
+          Game.run(event, game_id)        
+        when (users_power + 1)..added
+          # You killed the zombie but it took one of your own with it. 
+          event = {name: zom_hash[:name], description: "#{zom_hash[:name]} be killing your people.",
+                  effect: "bad", negative: nil, positive: nil, 
+                  effected_gold: nil, effected_points: nil, effected_population: (user.population >= 3 ? zom_hash[:effected_population] : nil )
+                  }
+          Game.run(event, game_id)        
+        end       
       when (zom_hash[:power] + 1)..added
         #zombie left
+        event = {name: zom_hash[:name], description: "#{zom_hash[:name]} could not get through your defense. ",
+                 effect: "meh", negative: nil, positive: nil, 
+                 effected_gold: nil, effected_points: 100, effected_population: nil
+                }
+        Game.run( event, game_id)
+      end
     end
   end
 
   private
 
   def init_setup
-    self.update_attributes(:gold => 1500, :points => 110, :population => 2)
+    self.update_attributes(:gold => 1500, :points => 110, :population => 12, :total_power => 10, :total_defense => 10, :total_luck => 10, :total_order => 10 )
     self.add_role :user
     Game.create(user_id: self.id, time_last_clicked: Time.now)
+    #set the users location
     #give a weapon, starter base, no llama, set the weapon and base as current.
   end
   

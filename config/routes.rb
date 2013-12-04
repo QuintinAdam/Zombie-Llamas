@@ -7,4 +7,5 @@ ZombieLlama::Application.routes.draw do
   resources :users
   resources :games
   get "event_runner", to: "games#event_runner", as: :event_runner
+  # mount SimpleContact::Engine => "/contact-me"
 end

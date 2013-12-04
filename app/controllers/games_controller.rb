@@ -7,7 +7,6 @@ class GamesController < ApplicationController
         redirect_to new_game_path
       else
         #if current user is signed in and they have a game redirect them to the show? page.
-        # redirect_to game_path
         @game = User.find(current_user.id).game
         redirect_to game_path(@game.id)
       end
@@ -16,7 +15,7 @@ class GamesController < ApplicationController
       redirect_to new_user_registration_path
     end
   end
-
+ 
   # This will be the profile page that anyone can see.
   def show
     @game = User.find(current_user.id).game
@@ -65,7 +64,10 @@ class GamesController < ApplicationController
   # This is how i start trigger the event. it sets some variables as well so i can use them latter.
   def event_runner
     @game = User.find(current_user.id).game
-    @game.run_event(@game.id)
+    can_run = @game.run_event(@game.id)
+    if can_run
+      Event.random_event(@game.id)
+    end
     redirect_to game_path(@game.id)
   end
 end

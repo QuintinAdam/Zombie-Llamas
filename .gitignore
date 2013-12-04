@@ -69,3 +69,4 @@ pickle-email-*.html
 /config/application.yml
 
 events.txt
+rails4notes.txt
