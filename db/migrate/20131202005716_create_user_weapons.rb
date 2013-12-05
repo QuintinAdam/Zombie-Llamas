@@ -3,7 +3,7 @@ class CreateUserWeapons < ActiveRecord::Migration
     create_table :user_weapons do |t|
       t.belongs_to :user
       t.string :name
-      t.text :decription
+      t.text :description
       t.integer :power
       t.integer :power_bonus
       t.integer :luck

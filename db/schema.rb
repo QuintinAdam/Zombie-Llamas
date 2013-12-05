@@ -11,12 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131203011219) do
-
-  create_table "events", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20131202015319) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
@@ -45,9 +40,9 @@ ActiveRecord::Schema.define(:version => 20131203011219) do
   create_table "user_bases", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.text     "decription"
-    t.integer  "defence"
-    t.integer  "defence_bonus"
+    t.text     "description"
+    t.integer  "defense"
+    t.integer  "defense_bonus"
     t.integer  "luck"
     t.integer  "order"
     t.datetime "created_at",    :null => false
@@ -72,11 +67,11 @@ ActiveRecord::Schema.define(:version => 20131203011219) do
   create_table "user_llamas", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.text     "decription"
+    t.text     "description"
     t.integer  "power"
     t.integer  "power_bonus"
-    t.integer  "defence"
-    t.integer  "defence_bonus"
+    t.integer  "defense"
+    t.integer  "defense_bonus"
     t.integer  "luck"
     t.integer  "order"
     t.datetime "created_at",    :null => false
@@ -88,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20131203011219) do
   create_table "user_weapons", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.text     "decription"
+    t.text     "description"
     t.integer  "power"
     t.integer  "power_bonus"
     t.integer  "luck"

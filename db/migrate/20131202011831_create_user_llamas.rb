@@ -3,11 +3,11 @@ class CreateUserLlamas < ActiveRecord::Migration
     create_table :user_llamas do |t|
       t.belongs_to :user
       t.string :name
-      t.text :decription
+      t.text :description
       t.integer :power
       t.integer :power_bonus
-      t.integer :defence
-      t.integer :defence_bonus
+      t.integer :defense
+      t.integer :defense_bonus
       t.integer :luck
       t.integer :order
 

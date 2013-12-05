@@ -3,9 +3,9 @@ class CreateUserBases < ActiveRecord::Migration
     create_table :user_bases do |t|
       t.belongs_to :user
       t.string :name
-      t.text :decription
-      t.integer :defence
-      t.integer :defence_bonus
+      t.text :description
+      t.integer :defense
+      t.integer :defense_bonus
       t.integer :luck
       t.integer :order
 

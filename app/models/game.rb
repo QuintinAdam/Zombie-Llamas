@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
   def number_of_events
     #self.user_events.last.destroy if self.user_events.count() > 10
   end
-
+ 
   def can_run_event?
     Time.now - time_last_clicked > 10 
   end
@@ -15,7 +15,6 @@ class Game < ActiveRecord::Base
   def run_event(game_id)
     if can_run_event?
       true
-      # Event.random_event(game_id)
     else
       false
     end

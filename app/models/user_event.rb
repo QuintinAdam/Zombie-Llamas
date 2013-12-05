@@ -5,3 +5,4 @@ class UserEvent < ActiveRecord::Base
     # Don't no why i thought i would need that. or if i need this.
   end
 end
+ 
