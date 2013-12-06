@@ -3,13 +3,13 @@ class Event < ActiveRecord::Base
   #then it picks 1 type_of_event and calls that method.
   # from there it will pick a event in that type of event and go to that model.
   #, "colony_event", "llama_event", "zom_lam_event" , "supply_event"
-  random = Random.new 
+  @random = Random.new 
   def self.hauncayo(game_id)
     event_hauncayo = ["zombie_event"]
-    type_of_event = event_hauncayo[random.rand(0...(event_hauncayo.count))]
+    type_of_event = event_hauncayo[@random.rand(0...(event_hauncayo.count))]
     def self.zombie_event(game_id)
-      type_of_zombie = random.rand(1..100)
-      # with that random number it will call a zombie in the zombie model
+      type_of_zombie = @random.rand(1..100)
+      # with that @random number it will call a zombie in the zombie model
       case type_of_zombie
       when 1..50 then Zombie.zombie("bob", game_id)
       when 51..100 then Zombie.zombie("steve", game_id)
@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
     end
 
     def self.colony_event
-      type_of_colony_event = random.rand(1..100)
+      type_of_colony_event = @random.rand(1..100)
       # a colony event is an event that happens inside of the base.
       case type_of_colony_event
       when 1..50 then Colony.colony("type", game_id)
@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
     end
 
     def self.supply_event(game_id)
-      type_of_supply_event = random.rand(1..100)
+      type_of_supply_event = @random.rand(1..100)
       # a supplies event that happens on the outside of the colony
       case type_of_supply_event
       when 1..60 then Supply.supply("small", game_id)
@@ -44,7 +44,7 @@ class Event < ActiveRecord::Base
     end
 
     def self.zom_lam_event(game_id)
-      type_of_zom_lam_event = random.rand(1..100)
+      type_of_zom_lam_event = @random.rand(1..100)
       # zombie llama event is where a zombie llama attacks.
 
     end
@@ -83,7 +83,7 @@ class Event < ActiveRecord::Base
     # when "Santa Lucia" then santa_lucia(game_id)
     # when "Arequipa" then arequipa(game_id)
     # when "Mollendo" then mollendo(game_id)
-    # when "san Juan de Marcona" then san_juan(game_id)
+    # when "San Juan de Marcona" then san_juan(game_id)
     # when "Nazca" then nazca(game_id)
     # when "Ica" then ica(game_id)
     # when "Pisco" then pisco(game_id)

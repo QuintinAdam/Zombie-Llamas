@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_one :game
-  has_many :user_bases
-  has_many :user_weapons
-  has_many :user_llamas
+  has_one :game 
+  has_many :user_bases 
+  has_many :user_weapons 
+  has_many :user_llamas 
  
   rolify
   after_create :init_setup
@@ -14,24 +14,23 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, 
                   :gold, :points, :population, 
                   :total_power, :total_defense, :total_luck, :total_order 
- 
-
+   
   def self.zombie_math(zom_hash, game_id)
     random = Random.new 
-    game = Game.find(game_id)
-    user = User.find(game.user_id)
-    # Does the zombie get through your defense?
+    game = Game.find(game_id) 
+    user = User.find(game.user_id) 
+    # Does the zombie get through your defense? 
     luck = random.rand(0..user.total_luck)
-    dluck = luck % 10.0
+    dluck = luck % 10.0 
     # finds if luck is on there side.
-    users_power = (user.total_power * dluck) + user.total_power
+    users_power = (user.total_power * dluck) + user.total_power 
     users_defense = (user.total_defense * dluck) + user.total_defense
     users_order = (user.total_order * dluck) + user.total_order
 
     # If the zombies power is greater then the users def. then the zombie gets inside.
     # else the zombie has a hard time getting in and loses half its defense. 
-    add_zompower_and_userdef = zombie[:power] + users_defense
-    weaken_chance = random.rand(0..add_zompower_and_userdef)
+    add_zompower_and_userdef = zom_hash[:power] + users_defense
+    weaken_chance = random.rand(0..add_zompower_and_userdef) 
     case weaken_chance
     when 0..users_defense
       # zombie is having a hard time getting though your defense.

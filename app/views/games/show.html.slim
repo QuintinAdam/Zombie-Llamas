@@ -5,7 +5,8 @@ p = "Populations: #{@user.population}"
 p = "Total Power: #{@user.total_power}" 
 p = "Total Defenses: #{@user.total_defense}" 
 p = "Total Luck: #{@user.total_luck}"  
-p = "Total Order: #{@user.total_order}" 
+p = "Total Order: #{@user.total_order}"
+p = "Location: #{@game.location}" 
 
 -if @game.can_run_event?
   = button_to "Run Event", event_runner_path, method: :get, class: "btn bt-lg btn-primary"
