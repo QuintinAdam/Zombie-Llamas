@@ -1,24 +1,78 @@
-h3 = @user.name
-p = "Gold: #{@user.gold}"
-p = "Points: #{@user.points}"
-p = "Populations: #{@user.population}" 
-p = "Total Power: #{@user.total_power}" 
-p = "Total Defenses: #{@user.total_defense}" 
-p = "Total Luck: #{@user.total_luck}"  
-p = "Total Order: #{@user.total_order}"
-p = "Location: #{@game.location}" 
-
--if @game.can_run_event?
-  = button_to "Run Event", event_runner_path, method: :get, class: "btn bt-lg btn-primary"
-.logs    
-  - if @logs.nil?
-    p There is nothing here... Run an Event.
-  -else  
-    - @logs.each do |x|
-      .log class="#{x.effect}"
-        p = "#{time_ago_in_words(x.created_at)} ago - #{x.name}"
-        p = "#{x.description}."
-        - unless x.positive.nil?
-          p = "You gained #{x.positive}."
-        - unless x.negative.nil?
-          p = "You lost #{x.negative}."
+.row.event-area 
+  .col-xs-12
+    .col-xs-4.col-xs-offset-1 
+    -if @game.can_run_event?
+      = button_to "Run Event", event_runner_path, method: :get, class: "btn btn-lg btn-primary event-btn"
+br/   
+.row.info       
+  .col-xs-4
+    p = "Location: #{@game.location}" 
+    p Rank: Novice 
+  .col-xs-4
+    p = "Gold: #{@user.gold}"
+    p = "Points: #{@user.points}"
+    p = "Populations: #{@user.population}"
+  .col-xs-4
+    p Weapon: BB Gun
+    p Base: Cardboard Fortress
+    p Llama: Baby Llama
+    / p = "Base: #{@base}"
+    / p = "Weapon: #{@weapon}"
+    / p = "Llama: #{@llama}" 
+br/    
+.row 
+  .col-xs-6.site-left
+    h4.col-xs-12 Current Setup 
+    .col-xs-6 
+      p Total Power: 5 - 17
+      p Total Defense: 3 - 13
+      / p = "Total Power: #{@user.total_power}" 
+      / p = "Total Defense: #{@user.total_defense}"
+      br/
+    .col-xs-6 
+      p Total Luck: 17
+      p Total Order: 20
+      / p = "Total Luck: #{@user.total_luck}"  
+      / p = "Total Order: #{@user.total_order}"
+      br/
+    .col-xs-12.weapon-area
+      h4 Weapon: BB Gun
+      .weapon
+        p Power: 4
+        p Power Boost: 1%
+        p Luck: 5
+        p Order: 10
+      br/  
+    .col-xs-12.base-area
+      h4 Base: Cardboard Fortress  
+      .base
+        p Defense: 3
+        p Defense Boost: 0
+        p Luck: 2
+        p Order: -10
+      br/  
+    .col-xs-12.llama-area   
+      h4 Llama: Baby Llama
+      .llama     
+        p Power: 0
+        p Power Boost: 30%
+        p Defense: 0
+        p Defense Boost: 30%
+        p Luck: 10
+        p Order: 20
+      br/
+  .col-xs-6.site-right  
+    .logs
+      h4.text-center.event-header Event Log    
+      - if @logs.nil?
+        p There is nothing here... Run an Event.
+      -else  
+        - @logs.each do |x|
+          .log class="#{x.effect}"
+            p = "#{time_ago_in_words(x.created_at)} ago - #{x.name}"
+            p = "#{x.description}."
+            - unless x.positive.nil?
+              p = "You gained #{x.positive}."
+            - unless x.negative.nil?
+              p = "You lost #{x.negative}."
+br/              

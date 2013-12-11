@@ -21,6 +21,12 @@ class GamesController < ApplicationController
     @game = User.find(current_user.id).game
     @user = @game.user
     @logs = @game.user_events.order('id DESC')
+    @weapon = @game.current_weapon
+    @base = @game.current_base
+    @llama = @game.current_llama
+    #@weapon_stats = Weapon.find(search by name)
+    #@base_stats = Base.find(search by name)
+    #@llama_stats = Llama.find(search by name)
   end
 
   #If the User has no game then the new action will be called.

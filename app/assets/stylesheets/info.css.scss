@@ -1,0 +1,23 @@
+.info{
+  color: #000;
+  background-color: $areaback;
+  border: 3px solid gray;
+  border-radius: 30px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.event-area{
+  padding: 0;
+  margin: 0;
+} 
+
+.event-btn{
+  background: url("blood.jpg") no-repeat; cursor: pointer;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  min-height: 80px;
+  padding: 0px;
+  margin: 0px;
+}

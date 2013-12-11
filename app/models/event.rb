@@ -1,12 +1,12 @@
-class Event < ActiveRecord::Base
+class Event < ActiveRecord::Base 
   #inside each location you have an event_(location) array that has the type of events
   #then it picks 1 type_of_event and calls that method.
   # from there it will pick a event in that type of event and go to that model.
-  #, "colony_event", "llama_event", "zom_lam_event" , "supply_event"
+  #, "colony_event", "llama_event", "zom_lam_event" , "supply_event" "zombie_event",
   @random = Random.new 
-  def self.hauncayo(game_id)
-    event_hauncayo = ["zombie_event"]
-    type_of_event = event_hauncayo[@random.rand(0...(event_hauncayo.count))]
+  def self.huancayo(game_id)
+    event_huancayo = ["zombie_event", "supply_event"]
+    type_of_event = event_huancayo[@random.rand(0...(event_huancayo.count))]
     def self.zombie_event(game_id)
       type_of_zombie = @random.rand(1..100)
       # with that @random number it will call a zombie in the zombie model
@@ -28,6 +28,8 @@ class Event < ActiveRecord::Base
     def self.supply_event(game_id)
       type_of_supply_event = @random.rand(1..100)
       # a supplies event that happens on the outside of the colony
+      # based on population?
+
       case type_of_supply_event
       when 1..60 then Supply.supply("small", game_id)
       when 61..90 then Supply.supply("med", game_id)
@@ -63,11 +65,11 @@ class Event < ActiveRecord::Base
     location = game.location
 
     if location.nil?
-      location = "Hauncayo"
+      location = "Huancayo"
     end
 
     case location
-    when "Hauncayo" then hauncayo(game_id)
+    when "Huancayo" then huancayo(game_id)
     # when "Huancavelica" then huancavelica(game_id)
     # when "Ayacucho" then ayacucho(game_id)
     # when "Audahaylas" then audahaylas(game_id)

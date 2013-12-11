@@ -1,0 +1,34 @@
+
+.logs{
+  padding: 10px;
+  background-color: $areaback;
+  color: #000;
+  border-top: 3px solid gray;
+  border-right: 3px solid gray;
+  border-bottom: 3px solid gray;
+  border-radius: 0 30px 30px 0;
+  max-height: 798px;
+  overflow: scroll;
+}
+.event-header{
+  margin-bottom: -0.5px;
+  margin-top: 1px;
+  border-bottom: 1px dotted rgb(51, 51, 51);
+}
+.log{
+  /*border: ;*/
+  border-bottom: 1px dotted rgb(51, 51, 51);
+  padding: 10px;
+}
+.good{
+  background-color: #FFA;
+}
+
+.bad{
+  background-color: #ffbfbf;
+}
+
+.meh{
+  background-color: rgba(0, 0, 0, 0);
+}
+

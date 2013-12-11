@@ -1,0 +1,52 @@
+$brand-primary: #990000;
+$brand-success: #5cb85c;
+$brand-info:#330066;
+
+$hr-border: #000;
+$font-size-base: 16px;
+$btn-default-color: #333;
+$btn-default-bg: #fff;
+$btn-default-border: #ccc;
+
+$navbar-default-color: #000;
+$navbar-default-bg: $background;
+/*$navbar-default-border:3px solid gray;*/
+$navbar-default-link-color: #000;
+$navbar-default-link-hover-color: #333;
+.navbar-default{
+  border-radius: 30px;
+}
+
+$headings-small-color: darkred;
+/* forms 
+
+/*$input-color: black;*/
+/*$input-border: #000;*/
+/*$input-color-placeholder: gray-light;*/
+/*$input-bg: #f0f0f3;*/
+/*$input-border-focus: #990000;*/
+
+/*normal stuff*/
+
+/*$body-bg: #000;*/
+/*$text-color: #fff;*/
+/*.body{*/
+  /*color: #fff;*/
+/*}*/
+.container{
+  /*background-color: #000;*/
+  /*border-bottom: 1px solid red;*/
+  max-width: 800px;
+  background-image: url("metal-wall.jpg");
+  border-radius: 20px;
+  border: 5px solid grey;
+}
+
+
+
+
+@import "bootstrap";
+@import "logs";
+@import "siteleft";
+@import "info";
+

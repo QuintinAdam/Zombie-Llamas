@@ -6,7 +6,7 @@ class Zombie < ActiveRecord::Base
       #        effected_gold: 0, effected_points: 0, effected_population: -1
       #       }
       # User.zombie_math(bob) 
-#send the zombie info to the user model to do the math.
+#send the zombie info to the user model to do the math. 
   def self.zombie(name, game_id)
     case name
     when "bob" 
