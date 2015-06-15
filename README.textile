@@ -1,3 +1,5 @@
+Old project for DPL
+
 h1. Zombie llama
 
 h2. Ruby on Rails
@@ -44,6 +46,3 @@ If you add functionality to this application, create an alternative implementati
 h2. Credits
 
 Quintin Adam
-
-h2. License
-
